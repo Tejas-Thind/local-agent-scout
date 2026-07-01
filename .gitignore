@@ -1,0 +1,32 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# local state + data (keep the folder, not the contents)
+data/*
+!data/.gitkeep
+*.sqlite
+*.db
+
+# traces / logs
+traces/
+*.jsonl
+!evals/data/*.example.jsonl
+
+# eval ground truth is personal; commit only *.example.jsonl
+evals/data/*.jsonl
+!evals/data/*.example.jsonl
+
+# os
+.DS_Store

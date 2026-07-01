@@ -1,0 +1,32 @@
+[project]
+name = "local-agent-scout"
+version = "0.0.1"
+description = "A locally-run agent that scouts and enriches companies against a personal ICP, measured against a frontier model."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "anthropic>=0.40",   # frontier teacher / comparison model
+    "ollama>=0.3",       # local open-weight executor
+    "pydantic>=2.7",     # structured tool output + validation
+    "httpx>=0.27",       # fetching public pages for enrichment
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[project.scripts]
+scout = "local_agent_scout.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/local_agent_scout"]
+
+[tool.ruff]
+line-length = 100
