@@ -1,51 +1,37 @@
 # local-agent-scout
 
-A locally-run agent that scouts and enriches companies against a personal ICP, built to answer one question: how far can a small open-weight model running on your own machine take an agent loop before it needs a frontier model to step in?
+Research and a build testing one question: how far can a small open-weight model, running locally, take an agent loop before it needs a frontier model to step in?
 
-You give it a hiring signal (a "who's hiring" roundup, a newsletter). It extracts the companies, enriches each from free public sources, scores them against a rubric you define, and for the strong fits it finds a contact and drafts outreach. You review before anything goes out. It never sends on its own.
+Open models are closing the gap fast, and for a lot of real work the economics have already flipped. This repo is where I pin that down with a real task and a real eval instead of vibes.
 
-The point is not the job scouting. The point is the measurement: the same pipeline runs on a local open model (via [Ollama](https://ollama.com)) and on a frontier model, and the eval shows where the local model is good enough and where it is not.
+## Why now
+
+The frontier-to-open gap is narrowing and the substitution is already happening in production:
+
+- Open-weight models now generate the majority of named token volume on OpenRouter, ahead of closed models [1].
+- A local Qwen3.5-9B reportedly scores 81.7 on GPQA Diamond, ahead of much larger models, and 91.3 on AIME 2026, close to Opus, while running on a laptop. It still trails on agentic coding (SWE-bench 76.4 vs Opus 80%+). That gap, small on reasoning and wider on multi-step agentic work, is exactly what is worth measuring.
+- Companies are substituting already. Lindy moved production traffic off a frontier model to an open one, and Harvey post-trained an open model that beat Opus on their legal benchmark at roughly 11x lower cost [2].
+
+## The approach
+
+I'm applying the skill-distillation pattern Tomasz Tunguz has written about [3] and pushing on the open question in it. A frontier model writes and refines the procedure once as a skill file, a cheaper local model executes it at runtime, and the frontier model stays as an escalation path for the genuinely hard calls.
+
+Architecture (full detail in `ARCHITECTURE.md`):
+
+- a hand-built harness (tool-use loop, state, tracing, per-stage evals), no framework
+- a local open model as the executor (Qwen3.5-9B via Ollama), a frontier model as the teacher
+- the model swappable behind one adapter, so local vs frontier is a one-line change and the gap is measurable
+
+## The build
+
+The test task is a company scout. Given a hiring signal, it extracts companies, scores each against a rubric, and surfaces the strong fits. The task has clean ground truth, so every stage is scored against hand labels. The point isn't the scouting. The point is the number: where the local model matches the frontier model, where it doesn't, and where a router should escalate.
 
 ## Status
 
-Early. Built in stages, one tool at a time, with an eval per stage. See `ARCHITECTURE.md` for the design and the build order.
+Research and architecture are here. The build is underway, stage by stage, eval first. Numbers land here as they come.
 
-## How it works
+## Sources
 
-```
-signal in (pasted post / newsletter)
-   -> extract      messy text into structured company rows
-   -> enrich       fetch site + jobs page, pull ICP-relevant fields
-   -> score        apply the rubric, output a fit score + reasons
-   -> find_contact  (high-fit only) surface a contact
-   -> draft        outreach from a template
-   -> you review and send
-```
-
-The model is a swappable adapter, so running local vs frontier is a one-line change. The scoring step is decomposed: the model extracts features, deterministic code computes the score.
-
-## Quickstart
-
-Requires Python 3.11+ and [Ollama](https://ollama.com).
-
-```bash
-# install
-pip install -e .
-
-# pull the local model
-ollama pull qwen3.5:9b
-
-# set keys (for the frontier comparison)
-cp .env.example .env   # then fill in ANTHROPIC_API_KEY
-
-# run a stage (once implemented)
-python -m local_agent_scout.cli extract data/example_post.txt
-```
-
-## Eval
-
-Every stage is scored against hand-labeled ground truth in `evals/`. Swap the model in `.env`, rerun, compare. That number is the whole point.
-
-## License
-
-MIT (add a LICENSE file before making public).
+- [1] Tunguz, The Thriving Ecosystem of Open Models. tomtunguz.com/the-thriving-ecosystem-of-open-models
+- [2] Tunguz, The Substitution Wave in AI. tomtunguz.com/inflation-deflation-ai
+- [3] Tunguz, Skill Distillation. tomtunguz.com/the-pi-agent-skill-distillation
