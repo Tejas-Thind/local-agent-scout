@@ -30,6 +30,17 @@ The test task is a company scout. Given a hiring signal, it extracts companies, 
 
 The scout is the first experiment, not the end goal. I'm using it to answer the starting question, how much of a real agentic workflow a local model can run on its own. From there I want to grow this into a personal agent that takes on more of my own work over time, one measured skill at a time, with the same harness underneath and a frontier model teaching each new skill as I add it. This repo is the research and experimentation base for that.
 
+## What I'm testing
+
+Open questions the build is set up to answer, each with a real eval behind it.
+
+- How small the model can go before it stops clearing the bar. The same task across Qwen3.5 at a few sizes and quant levels, accuracy plotted against memory and tokens per second. The smallest model that still works is the interesting one.
+- Where a small model breaks in an agent loop, and how, not just how often. Wrong tool, invented arguments, not knowing when to stop, losing state across turns.
+- Whether a written skill file can stand in for model size. A raw 9B against the same 9B running a procedure a frontier model wrote and refined, measured as the gap closes.
+- Whether a local model can orchestrate the loop at all, or if orchestration is the one part that still needs a frontier model. The deterministic pipeline is the control, the model as orchestrator is the test.
+- How much a router actually saves. Once I know the failure modes, escalate only on those and measure the accuracy I keep against the cost I cut.
+- Whether the eval is reproducible for anyone. The goal is that someone can point it at their own local model and get their own number.
+
 ## Status
 
 Research and architecture are here. The build is underway, stage by stage, eval first. Numbers land here as they come.
