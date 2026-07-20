@@ -36,6 +36,6 @@ Research and architecture are here. The build is underway, stage by stage, eval 
 
 ## Sources
 
-- [1] Tunguz, The Thriving Ecosystem of Open Models. tomtunguz.com/the-thriving-ecosystem-of-open-models
-- [2] Tunguz, The Substitution Wave in AI. tomtunguz.com/inflation-deflation-ai
-- [3] Tunguz, Skill Distillation. tomtunguz.com/the-pi-agent-skill-distillation
+- [1] Tomasz Tunguz, [The Thriving Ecosystem of Open Models](https://tomtunguz.com/the-thriving-ecosystem-of-open-models)
+- [2] Tomasz Tunguz, [The Substitution Wave in AI](https://tomtunguz.com/inflation-deflation-ai)
+- [3] Tomasz Tunguz, [Skill Distillation](https://tomtunguz.com/the-pi-agent-skill-distillation)
