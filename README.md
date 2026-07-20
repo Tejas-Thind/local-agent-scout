@@ -26,6 +26,10 @@ Architecture, with full detail in ARCHITECTURE.md.
 
 The test task is a company scout. Given a hiring signal, it extracts companies, scores each against a rubric, and surfaces the strong fits. The task has clean ground truth, so every stage is scored against hand labels. The scouting is just the test harness. What I care about is the number. Where the local model matches the frontier model, where it falls short, and where a router should escalate.
 
+## Where this goes
+
+The scout is the first experiment, not the end goal. I'm using it to answer the starting question, how much of a real agentic workflow a local model can run on its own. From there I want to grow this into a personal agent that takes on more of my own work over time, one measured skill at a time, with the same harness underneath and a frontier model teaching each new skill as I add it. This repo is the research and experimentation base for that.
+
 ## Status
 
 Research and architecture are here. The build is underway, stage by stage, eval first. Numbers land here as they come.
