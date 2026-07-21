@@ -41,10 +41,6 @@ Open questions the build is set up to answer, each with a real eval behind it.
 - How much a router actually saves. Once I know the failure modes, escalate only on those and measure the accuracy I keep against the cost I cut.
 - Whether the eval is reproducible for anyone. The goal is that someone can point it at their own local model and get their own number.
 
-## Status
-
-Research and architecture are here. The build is underway, stage by stage, eval first. Numbers land here as they come.
-
 ## Sources
 
 - [1] Tomasz Tunguz, [The Thriving Ecosystem of Open Models](https://tomtunguz.com/the-thriving-ecosystem-of-open-models)
