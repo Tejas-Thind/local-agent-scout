@@ -18,7 +18,7 @@ I'm applying the skill distillation pattern Tomasz Tunguz has written about [3] 
 
 Architecture, with full detail in ARCHITECTURE.md.
 
-- a harness I built by hand (the loop, tool calls, state, tracing, and an eval at every stage), no framework
+- a harness I'm building instead of using an agent framework (the loop, tool calls, state, tracing, and an eval at every stage)
 - a local open model as the executor (Qwen3.5-9B on Ollama), a frontier model as the teacher
 - the model swappable behind one adapter, so switching local for frontier is one change and the gap is measurable
 
