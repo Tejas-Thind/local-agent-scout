@@ -28,7 +28,7 @@ The test task is a company scout. Given a hiring signal, it extracts companies, 
 
 ## Where this goes
 
-The scout is the first experiment, not the end goal. I'm using it to answer the starting question, how much of a real agentic workflow a local model can run on its own. From there I want to grow this into a personal agent that takes on more of my own work over time, one measured skill at a time, with the same harness underneath and a frontier model teaching each new skill as I add it. This repo is the research and experimentation base for that.
+The scout is the first experiment, not the end goal. I'm using it to answer the starting question, how much of a real agentic workflow a local model can run on its own. From there I want to grow this into a personal agent that takes on more of my own work over time, one measured skill at a time, with the same harness underneath and a frontier model teaching each new skill as I add it. This repo is the research and experimentation base for that. The full path, from the scorer to the monitor, autofill, and beyond, is in `ROADMAP.md`.
 
 ## What I'm testing
 
